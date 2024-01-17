@@ -4,7 +4,6 @@ from langchain.prompts import PromptTemplate
 
 load_dotenv()
 
-# second example below:
 hub_llm = HuggingFaceHub(
     repo_id='gpt2',
     model_kwargs={'temperature': 0.7, 'max_length': 100}
