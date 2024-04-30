@@ -4,6 +4,9 @@ import sys
 import random
 
 pygame.init()
+pygame.mixer.init() 
+pygame.mixer.music.load("snake_theme.mp3")
+pygame.mixer.music.play(-1)
 FPS = 15
 BLACK = (0, 0, 0)
 GREEN = (0, 255, 0)
@@ -139,7 +142,7 @@ def gameover():
     canvas.blit(font_gameover2, font_gameover2_rect)
     canvas.blit(font_gameover3, font_gameover3_rect)
     pygame.display.update()
-
+    pygame.mixer.music.stop()
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
