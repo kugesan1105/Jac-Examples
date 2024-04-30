@@ -3,7 +3,10 @@ import:py sys ;
 import:py random ;
 
 with entry {
-    pygame.<>init() ;    
+    pygame.<>init() ;    #need to fix <> dusing conversion
+    pygame.mixer.<>init() ;    
+    pygame.mixer.music.load("snake_theme.mp3") ;    
+    pygame.mixer.music.play(-1) ;    
     FPS=15;    
     BLACK=(0, 0, 0);    
     GREEN=(0, 255, 0);    
@@ -154,6 +157,7 @@ can gameover() {
     canvas.blit(font_gameover2, font_gameover2_rect) ;    
     canvas.blit(font_gameover3, font_gameover3_rect) ;    
     pygame.display.update() ;    
+    pygame.mixer.music.stop() ;    
     
     while True {
         for event in pygame.event.get() {
@@ -204,7 +208,7 @@ can snake(snakelist: Any, direction: Any) {
     canvas.blit(head, snakelist[-1]) ;    
     canvas.blit(tail, snakelist[0]) ;    
     
-    for XnY in snakelist[1: -1] {
+    for XnY in snakelist[1: -1] {  #need to fix : and -1 issue 
         pygame.draw.rect(canvas, BLUE, (XnY[0], XnY[1], SNAKE_WIDTH, SNAKE_WIDTH)) ;
     }
 }
