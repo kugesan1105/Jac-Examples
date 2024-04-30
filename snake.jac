@@ -3,7 +3,14 @@ import:py sys ;
 import:py random ;
 
 with entry {
-    pygame.<>init() ;    
+    pygame.<>init() ;   
+    pygame.mixer.<>init() ; # Initialize the mixer
+
+  # Load the music file
+    pygame.mixer.music.load("/home/dell/Desktop/jac_kug/miscelleneous/Jac-Examples/snake_theme.mp3");
+    
+    # Start playing the music in a loop
+    pygame.mixer.music.play(-1);
     FPS=15;    
     BLACK=(0, 0, 0);    
     GREEN=(0, 255, 0);    
@@ -154,7 +161,6 @@ can gameover() {
     canvas.blit(font_gameover2, font_gameover2_rect) ;    
     canvas.blit(font_gameover3, font_gameover3_rect) ;    
     pygame.display.update() ;    
-    
     while True {
         for event in pygame.event.get() {
             if event.type == pygame.QUIT {
@@ -179,7 +185,7 @@ can gameover() {
                 }
             }
         }
-        
+        pygame.mixer.music.stop();
         pygame.display.update() ;
     }
 }
