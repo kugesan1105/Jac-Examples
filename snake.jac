@@ -3,7 +3,7 @@ import:py sys ;
 import:py random ;
 
 with entry {
-    pygame.<>init();
+    pygame.<>init() ;    
     FPS=15;    
     BLACK=(0, 0, 0);    
     GREEN=(0, 255, 0);    
@@ -201,10 +201,10 @@ can snake(snakelist: Any, direction: Any) {
         head=pygame.transform.rotate(snake_img, 180);    
         tail=pygame.transform.rotate(tail_img, 180);}
     
-    canvas.blit(head, snakelist[(-1)]) ;    
+    canvas.blit(head, snakelist[-1]) ;    
     canvas.blit(tail, snakelist[0]) ;    
     
-    for XnY in snakelist[1: (-1)] {
+    for XnY in snakelist[1: -1] {
         pygame.draw.rect(canvas, BLUE, (XnY[0], XnY[1], SNAKE_WIDTH, SNAKE_WIDTH)) ;
     }
 }
@@ -248,8 +248,8 @@ can gameloop() {
         LEAD_Y=100;    
         direction="right";    
         score=small_font.render("Score:0", True, YELLOW);    
-        APPLE_X=random.randrange(0,(WINDOW_WIDTH -10), 10);    
-        APPLE_Y=random.randrange(TOP_WIDTH, (WINDOW_HEIGHT - 10), 10);    
+        APPLE_X=random.randrange(0, WINDOW_WIDTH - 10, 10);    
+        APPLE_Y=random.randrange(TOP_WIDTH, WINDOW_HEIGHT - 10, 10);    
         snakelist=[];    
         snakelength=3;    
         pause_font=medium_font.render("II", True, RED);    
@@ -296,25 +296,25 @@ can gameloop() {
             }
             
             if direction == "up" {
-                LEAD_Y-VELOCITY;    
+                LEAD_Y-=VELOCITY;    
                 if LEAD_Y < TOP_WIDTH {
                     gameover() ;}
             }
             
             if direction == "down" {
-                LEAD_Y+VELOCITY;    
+                LEAD_Y+=VELOCITY;    
                 if LEAD_Y > WINDOW_HEIGHT - SNAKE_WIDTH {
                     gameover() ;}
             }
             
             if direction == "right" {
-                LEAD_X+VELOCITY;    
+                LEAD_X+=VELOCITY;    
                 if LEAD_X > WINDOW_WIDTH - SNAKE_WIDTH {
                     gameover() ;}
             }
             
             if direction == "left" {
-                LEAD_X-VELOCITY;    
+                LEAD_X-=VELOCITY;    
                 if LEAD_X < 0 {
                     gameover() ;}
             }
@@ -339,7 +339,7 @@ can gameloop() {
             if snake_head_rect.colliderect(apple_rect) {
                 APPLE_X=random.randrange(0, WINDOW_WIDTH - 10, 10);    
                 APPLE_Y=random.randrange(TOP_WIDTH, WINDOW_HEIGHT - 10, 10);    
-                snakelength+1;    
+                snakelength+=1;    
                 score=small_font.render("Score:" + str(snakelength - 3), True, YELLOW);}
             
             canvas.blit(score, (20, 10)) ;    
